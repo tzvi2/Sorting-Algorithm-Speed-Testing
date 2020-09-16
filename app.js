@@ -72,43 +72,61 @@ function bubbleSort(arr) {
         endTimeArray.push(performance.now()) 
     }
    
-    //console.log(arr)
+    console.log(arr)
     results()
-    return arr
+    //return arr
     
 }
 
 function quickSort(arr) {
-    qs(arr, 0, arr.length - 1);
-    console.log(arr)
-    return arr;
-
-
-    function qs(arr, start, end) {
-        if(start >= end) return;
-        const pivot = start;
-        let l = start + 1;
-        let r = end;
-        while (r >= l) {
-            if (arr[l] > arr[pivot] && arr[r] < arr[pivot]) {
-                swap(l, r, arr);
-            }
-            if (arr[l] <= arr[pivot]) l++;
-            if (arr[r] >= arr[pivot]) r--;
-        }
-        swap(pivot, r, arr);
-        qs(arr, start, r - 1)
-        qs(arr, r + 1, end)
-    } 
-
-    function swap(i, j, arr) {
-        let temp = arr[j];
-        arr[j] = arr[i];
-        arr[i] = temp;
+    for(let i = 0; i < numberOfExecutions; i++) {
+        startTimeArray.push(performance.now())
+        qs(arr, 0, arr.length - 1)
+        endTimeArray.push(performance.now())
     }
+    results()
+    console.log(arr)
 }
 
- 
+function qs(arr, left, right) {
+    let i;
+    if (arr.length > 1) {
+        i = partition(arr, left, right); 
+        if (left < i - 1) { 
+            qs(arr, left, i - 1);
+        }
+        if (i < right) { 
+            qs(arr, i, right);
+        }
+    }
+    return arr;
+}
+
+function partition(arr, start, end) {
+    let pivot = arr[Math.floor((end + start) / 2)] 
+    let l = start
+    let r = end
+    while (l <= r) {
+        while (arr[l] < pivot) {
+            l++;
+        }
+        while (arr[r] > pivot) {
+            r--;
+        }
+        if (l <= r) {
+            swap(arr, l, r); 
+            l++;
+            r--;
+        }
+    }
+    return l;
+}
+
+function swap(arr, i1, i2){
+    let tmp = arr[i1];
+    arr[i1] = arr[i2];
+    arr[i2] = tmp;
+}
 
 function results() {
     //console.log(startTimeArray, endTimeArray)
@@ -124,7 +142,7 @@ function results() {
     //console.log('diff',diff)
     //console.log('time diff array',timeDifferenceArray)
 
-    let avg = sortType + ': average of ' + (timeDifferenceArray.reduce((a,b) => a + b) / timeDifferenceArray.length).toFixed(3) + ' miliseconds.'
+    let avg = sortType + ': average of ' + (timeDifferenceArray.reduce((a,b) => a + b) / timeDifferenceArray.length).toFixed(3) + ' miliseconds. ('+ numberOfExecutions +' execution(s))'
 
     console.log(avg)
 
