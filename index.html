@@ -27,9 +27,9 @@
             <option value="Insertion sort">Insertion Sort</option>
             <option value="Quick sort">Quick Sort</option>
         </select>
-        <p class="algo_info" id="bubble_info">Bubble sort starts from the beginning of an array, and compares the first two numbers. If the left number is greater than the right, the two numbers are swapped. We then compare the second and third numbers, and so on -  until we reach the end when we start over from the beggining. If there were no swaps made in a given loop, the array is sorted.</p>
-        <p class="algo_info" id="insertion_info"></p>
-        <p class="algo_info" id="quicksort_info">To perform a quick sort algorithm we choose a number from the array to be a pivot. We'll then use two pointers to travel through the array, comparing numbers to the pivot, and placing numbers lower to the left, and higher to the right. After All the numbers were visited by the pointers once, we recurse on each side of the pivot element, choosing a new pivot and comparing numbers to that pivot.</p>
+        <p class="algo_info" id="bubble_info">Bubble sort starts from the beginning of an array, and compares the first two numbers. If the left number is greater than the right, the two numbers are swapped. We then compare the second and third numbers, and so on -  until we reach the end, when we start over from the beggining. If there were no swaps made in a given loop, the array is sorted.</p>
+        <p class="algo_info" id="insertion_info">Insertion sort is named as it is because we insert each number where it belongs. For each number in the array we set a pointer to its left, if the pointer element is greater than our number, we move the pointer element up one position in the array, and move our pointer left again. (ptr--) If the pointer element is less than our current number, we put our current number in to the right of the pointer.</p>
+        <p class="algo_info" id="quicksort_info">To utilize a quick sort algorithm we choose a number from the array to be a pivot. We'll then use two pointers to travel through the array, comparing numbers to the pivot, and placing numbers lower than the pivot to its left, and higher to its right. After all the numbers were visited by the pointers once, we recurse on each side of the pivot element, choosing a new pivot and comparing numbers to that pivot.</p>
 
         <label for="array_input">Array:</label>
         <input type="text" name="array_input" id="array_input" value="">
@@ -59,6 +59,6 @@
         <p id="array_display"></p>
     </div>
 
-    <script type="module" src="app.js"></script>
+    <script src="app.js"></script>
 </body>
 </html>

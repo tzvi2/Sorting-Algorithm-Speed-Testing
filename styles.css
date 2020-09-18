@@ -1,3 +1,10 @@
+
+
+#result_text {
+    display: none;
+}
+
+
 .spinner {
     display: none;
     border: 8px solid black;
@@ -5,7 +12,7 @@
     border-radius: 50%;
     width: 2.6em;
     height: 2.6em;
-    animation: spin 2.7s linear infinite;
+    animation: spin 2s linear infinite;
 }
 
 @keyframes spin {

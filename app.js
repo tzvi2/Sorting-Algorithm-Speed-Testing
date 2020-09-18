@@ -12,6 +12,7 @@ let timeDifferenceArray = []
 let inputArray;
 let numberOfExecutions = 1;
 let loading = false;
+let numOfGoClicks = 1
 
 // generate random array
 function getRandom() {
@@ -65,7 +66,7 @@ function spinner() {
 
 function bubbleSort(arr) {
 
-    for(let i = 0; i < numberOfExecutions; i++) {
+    for(let e = 0; e < numberOfExecutions; e++) {
         startTimeArray.push(performance.now())
 
         let sorted = false;
@@ -93,9 +94,29 @@ function bubbleSort(arr) {
     //return arr
     
 }
+// for each number find the right place for it and when place is found, shift everthing to the right and put it in.
+// for each number, check each number to the left, if greater - shift it right, if less, put current number after it.
+function insertionSort(arr) {
+    for(let e = 0; e < numberOfExecutions; e++) {
+        startTimeArray.push(performance.now())
+            for(let i = 1; i < arr.length; i++) {
+                let current = arr[i]
+                let finder = i - 1;
+                while(finder >= 0 && arr[finder] > current) {
+                    arr[finder + 1] = arr[finder]
+                    finder--
+                }
+                arr[finder + 1] = current;
+            }
+            endTimeArray.push(performance.now())
+        }
+    results()
+    console.log(arr)
+    return arr
+}
 
 function quickSort(arr) {
-    for(let i = 0; i < numberOfExecutions; i++) {
+    for(let e = 0; e < numberOfExecutions; e++) {
         startTimeArray.push(performance.now())
         qs(arr, 0, arr.length - 1)
         endTimeArray.push(performance.now())
@@ -155,7 +176,7 @@ function results() {
 
     loading = false
     setTimeout(spinner, 600)
-    setTimeout(displayResults, 900)
+    setTimeout(displayResults, 700)
 
     //console.log('start time array',startTimeArray)
     //console.log('end time array',endTimeArray)
@@ -165,7 +186,11 @@ function results() {
 }
 
 function displayResults() {
-    let avg = sortType + ': average of ' + (timeDifferenceArray.reduce((a,b) => a + b) / timeDifferenceArray.length).toFixed(3) + ' miliseconds. ( '+ numberOfExecutions +' execution(s) )'
+
+    document.getElementById('result_text').style.display = 'block'
+
+    let avg = numOfGoClicks + '. ' + sortType + ': average of ' + (timeDifferenceArray.reduce((a,b) => a + b) / timeDifferenceArray.length).toFixed(3) + ' miliseconds.  <em>'+ numberOfExecutions +' execution(s).</em>'
+    numOfGoClicks++
 
     console.log(avg)
 
