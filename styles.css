@@ -1,9 +1,10 @@
-
+#algo_info p{
+    display: none;
+}
 
 #result_text {
     display: none;
 }
-
 
 .spinner {
     display: none;

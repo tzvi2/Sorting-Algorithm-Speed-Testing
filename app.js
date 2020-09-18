@@ -1,6 +1,4 @@
 
-//$('#upload_array_btn').click(uploadArray)
-$('#sort_btn').click(sort)
 
 let sortType;
 let startTime;
@@ -13,6 +11,24 @@ let inputArray;
 let numberOfExecutions = 1;
 let loading = false;
 let numOfGoClicks = 1
+
+document.getElementById('bubble_info').style.display = 'block'
+
+$('#algo_dropdown').change(showInfo)
+$('#sort_btn').click(sort)
+
+function showInfo() {
+
+    sortType = $('#algo_dropdown').val()
+
+    $('#algo_info > p').each(function() {
+        if(this.id.split('_').includes(sortType.toLowerCase().split(' ')[0])) {
+            this.style.display = 'block'
+        } else {
+            this.style.display = 'none'
+        }
+    })
+}
 
 // generate random array
 function getRandom() {
@@ -29,6 +45,11 @@ function getRandom() {
 // identify and run selected sorting algorithm
 function sort() {
 
+    if($('#array_input').val() === '') {
+        alert('Please input an array.')
+        return
+    }
+
     loading = true;
     spinner()
     // clear times from previous execution
@@ -38,10 +59,10 @@ function sort() {
 
     inputArray = ($('#array_input').val()).split(',').map(a => parseInt(a))
     
-    sortType = $('#algo_dropdown').val() 
     numberOfExecutions = Number($('#num_executions').val())
     
     setTimeout(function() {
+
         if(sortType === 'Bubble sort') {
             bubbleSort(inputArray)
         }
