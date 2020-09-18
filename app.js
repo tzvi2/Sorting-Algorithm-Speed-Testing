@@ -1,3 +1,4 @@
+
 //$('#upload_array_btn').click(uploadArray)
 $('#sort_btn').click(sort)
 
@@ -10,6 +11,7 @@ let timeDifference;
 let timeDifferenceArray = []
 let inputArray;
 let numberOfExecutions = 1;
+let loading = false;
 
 // generate random array
 function getRandom() {
@@ -26,6 +28,8 @@ function getRandom() {
 // identify and run selected sorting algorithm
 function sort() {
 
+    loading = true;
+    spinner()
     // clear times from previous execution
     startTimeArray = []
     endTimeArray = []
@@ -36,14 +40,26 @@ function sort() {
     sortType = $('#algo_dropdown').val() 
     numberOfExecutions = Number($('#num_executions').val())
     
-    if(sortType === 'Bubble sort') {
-        bubbleSort(inputArray)
+    setTimeout(function() {
+        if(sortType === 'Bubble sort') {
+            bubbleSort(inputArray)
+        }
+        else if(sortType === 'Insertion sort') {
+            insertionSort(inputArray)
+        }
+        else if(sortType === 'Quick sort') {
+            quickSort(inputArray)
+        }
+    }, 300)
+    
+}
+
+function spinner() {
+    if(loading === true) {
+        document.getElementById('spinner').style.display = 'block'
     }
-    else if(sortType === 'Insertion sort') {
-        insertionSort(inputArray)
-    }
-    else if(sortType === 'Quick sort') {
-        quickSort(inputArray)
+    else if(loading === false) {
+        document.getElementById('spinner').style.display = 'none'
     }
 }
 
@@ -137,16 +153,21 @@ function results() {
         timeDifferenceArray.push(diff) 
     }
 
+    loading = false
+    setTimeout(spinner, 600)
+    setTimeout(displayResults, 900)
+
     //console.log('start time array',startTimeArray)
     //console.log('end time array',endTimeArray)
     //console.log('diff',diff)
     //console.log('time diff array',timeDifferenceArray)
 
-    let avg = sortType + ': average of ' + (timeDifferenceArray.reduce((a,b) => a + b) / timeDifferenceArray.length).toFixed(3) + ' miliseconds. ('+ numberOfExecutions +' execution(s))'
+}
+
+function displayResults() {
+    let avg = sortType + ': average of ' + (timeDifferenceArray.reduce((a,b) => a + b) / timeDifferenceArray.length).toFixed(3) + ' miliseconds. ( '+ numberOfExecutions +' execution(s) )'
 
     console.log(avg)
 
     $('#result_text').append('<p>'+avg+'</p>')
-
 }
-
