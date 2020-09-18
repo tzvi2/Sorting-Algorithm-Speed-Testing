@@ -1,6 +1,4 @@
-
-
-let sortType;
+let sortType = 'Bubble sort';
 let startTime;
 let endTime;
 let startTimeArray = []
@@ -11,11 +9,28 @@ let inputArray;
 let numberOfExecutions = 1;
 let loading = false;
 let numOfGoClicks = 1
+let sortedArrayVisible = false;
 
+// TO DO - run algorithm on array before showing results to take off the first run which is different than subsequent runs
+
+// document shows bubble sort text by default
 document.getElementById('bubble_info').style.display = 'block'
 
+// display correct text when dropdown menu options are selected
 $('#algo_dropdown').change(showInfo)
+
+// run sort function on 'go' click 
 $('#sort_btn').click(sort)
+
+// event listener on show sorted array button
+$('#showSortedArrayBtn').click(function() {
+
+    let sortedArrayArea = $('#sorted_array')
+
+    if(sortedArrayVisible === false) {
+
+    }
+})
 
 function showInfo() {
 
@@ -35,29 +50,30 @@ function getRandom() {
     
 }
 
-// show array on webpage and save it to var inputArray
-// function uploadArray() {
-//     inputArray = ($('#array_input').val()).split(',').map(a => parseInt(a))
-//     console.log(inputArray)
-//     //$('#array_display').append('[ ' + $('#array_input').val() + ' ]')
-// }
 
 // identify and run selected sorting algorithm
 function sort() {
 
-    if($('#array_input').val() === '') {
+    let arrayField = $('#array_input').val()
+
+    if(arrayField === '') {
         alert('Please input an array.')
+        return
+    }
+    if(arrayField.match(/[^,0-9]/gm)) {
+        alert('Enter only numbers and commas in the array field.')
         return
     }
 
     loading = true;
     spinner()
+
     // clear times from previous execution
     startTimeArray = []
     endTimeArray = []
     timeDifferenceArray = []
 
-    inputArray = ($('#array_input').val()).split(',').map(a => parseInt(a))
+    inputArray = arrayField.split(',').map(a => parseInt(a))
     
     numberOfExecutions = Number($('#num_executions').val())
     
@@ -89,7 +105,6 @@ function bubbleSort(arr) {
 
     for(let e = 0; e < numberOfExecutions; e++) {
         startTimeArray.push(performance.now())
-
         let sorted = false;
         let runs = 0;
         while(!sorted) {
@@ -104,19 +119,12 @@ function bubbleSort(arr) {
             }
             runs++
         }
-        // if(i === 0) {
-        //     console.log('sorted array: ',arr)
-        // }
-        endTimeArray.push(performance.now()) 
+        endTimeArray.push(performance.now())
+        //return arr
     }
-   
-    console.log(arr)
     results()
-    //return arr
-    
 }
-// for each number find the right place for it and when place is found, shift everthing to the right and put it in.
-// for each number, check each number to the left, if greater - shift it right, if less, put current number after it.
+
 function insertionSort(arr) {
     for(let e = 0; e < numberOfExecutions; e++) {
         startTimeArray.push(performance.now())
@@ -132,7 +140,6 @@ function insertionSort(arr) {
             endTimeArray.push(performance.now())
         }
     results()
-    console.log(arr)
     return arr
 }
 
@@ -143,7 +150,6 @@ function quickSort(arr) {
         endTimeArray.push(performance.now())
     }
     results()
-    console.log(arr)
 }
 
 function qs(arr, left, right) {
@@ -187,23 +193,18 @@ function swap(arr, i1, i2){
 }
 
 function results() {
-    //console.log(startTimeArray, endTimeArray)
+    
     for(let i = 0; i < endTimeArray.length; i++) {
-        //looping through endtimearray and adding diff between curelem and start time elem in same index to timediff arr
+        
         let diff = Number((endTimeArray[i] - startTimeArray[i]))
         
         timeDifferenceArray.push(diff) 
     }
 
     loading = false
+    // console.log(inputArray)
     setTimeout(spinner, 600)
     setTimeout(displayResults, 700)
-
-    //console.log('start time array',startTimeArray)
-    //console.log('end time array',endTimeArray)
-    //console.log('diff',diff)
-    //console.log('time diff array',timeDifferenceArray)
-
 }
 
 function displayResults() {
@@ -212,8 +213,6 @@ function displayResults() {
 
     let avg = numOfGoClicks + '. ' + sortType + ': average of ' + (timeDifferenceArray.reduce((a,b) => a + b) / timeDifferenceArray.length).toFixed(3) + ' miliseconds.  <em>'+ numberOfExecutions +' execution(s).</em>'
     numOfGoClicks++
-
-    console.log(avg)
 
     $('#result_text').append('<p>'+avg+'</p>')
 }

@@ -2,6 +2,10 @@
     display: none;
 }
 
+#sorted_array {
+    display: none;
+}
+
 #result_text {
     display: none;
 }
