@@ -5,11 +5,14 @@ let startTimeArray = []
 let endTimeArray = []
 let timeDifference;
 let timeDifferenceArray = []
+let uploadedArray;
 let inputArray;
 let numberOfExecutions = 1;
 let loading = false;
 let numOfGoClicks = 1
 let sortedArrayVisible = false;
+let userUpload = false;
+let inputString;
 
 // TO DO - run algorithm on array before showing results to take off the first run which is different than subsequent runs
 
@@ -19,19 +22,15 @@ document.getElementById('bubble_info').style.display = 'block'
 // display correct text when dropdown menu options are selected
 $('#algo_dropdown').change(showInfo)
 
+$('#array_upload').change(uploadArray)
+
 // run sort function on 'go' click 
 $('#sort_btn').click(sort)
 
-// event listener on show sorted array button
-$('#showSortedArrayBtn').click(function() {
+// show sorted array button - allows user to hide and display sorted array
+$('#showSortedArrayBtn').click(displaySortedArray)
 
-    let sortedArrayArea = $('#sorted_array')
-
-    if(sortedArrayVisible === false) {
-
-    }
-})
-
+// display information about selected sorting algorithm
 function showInfo() {
 
     sortType = $('#algo_dropdown').val()
@@ -50,46 +49,54 @@ function getRandom() {
     
 }
 
+function uploadArray() {
+    console.log('change')
+    userUpload = true
+    let reader = new FileReader()
+    reader.readAsText(this.files[0])
+    reader.onload = () => {
+        uploadedArray = reader.result
+        //console.log(uploadedArray)
+    }  
+}
+
 
 // identify and run selected sorting algorithm
 function sort() {
 
-    let arrayField = $('#array_input').val()
+    let arrayField = $('#array_input').val() 
+    inputString = (!userUpload) ? arrayField : uploadedArray
+    if(validateString(inputString)) {
+        // if user uploaded array, use it. If not, use input field. Make correct string into array
+        arrayify(inputString)
+        loading = true;
+        spinner()
 
-    if(arrayField === '') {
-        alert('Please input an array.')
-        return
+        // clear times from previous execution
+        startTimeArray = []
+        endTimeArray = []
+        timeDifferenceArray = []
+    
+        numberOfExecutions = Number($('#num_executions').val())
+        
+        setTimeout(function() {
+
+            if(sortType === 'Bubble sort') {
+                bubbleSort(inputArray)
+            }
+            else if(sortType === 'Insertion sort') {
+                insertionSort(inputArray)
+            }
+            else if(sortType === 'Quick sort') {
+                quickSort(inputArray)
+            }
+        }, 300)
     }
-    if(arrayField.match(/[^,0-9]/gm)) {
-        alert('Enter only numbers and commas in the array field.')
-        return
-    }
+}
 
-    loading = true;
-    spinner()
-
-    // clear times from previous execution
-    startTimeArray = []
-    endTimeArray = []
-    timeDifferenceArray = []
-
-    inputArray = arrayField.split(',').map(a => parseInt(a))
-    
-    numberOfExecutions = Number($('#num_executions').val())
-    
-    setTimeout(function() {
-
-        if(sortType === 'Bubble sort') {
-            bubbleSort(inputArray)
-        }
-        else if(sortType === 'Insertion sort') {
-            insertionSort(inputArray)
-        }
-        else if(sortType === 'Quick sort') {
-            quickSort(inputArray)
-        }
-    }, 300)
-    
+function arrayify(str) {
+    // filter out brackets, then convert string to array of numbers
+    inputArray = str.split('').filter(a => a!= '[' && a != ']').join('').split(',').map(a => parseInt(a))
 }
 
 function spinner() {
@@ -99,6 +106,18 @@ function spinner() {
     else if(loading === false) {
         document.getElementById('spinner').style.display = 'none'
     }
+}
+
+function validateString(str) {
+    if(str === '') {
+        alert('Input is empty.')
+        return false
+    }
+    if(str.match(/[a-zA-Z][!@#$%&*()]/gm)) {
+        alert('Array should contain only numbers and commas.')
+        return false
+    }
+    return true
 }
 
 function bubbleSort(arr) {
@@ -211,8 +230,23 @@ function displayResults() {
 
     document.getElementById('result_text').style.display = 'block'
 
-    let avg = numOfGoClicks + '. ' + sortType + ': average of ' + (timeDifferenceArray.reduce((a,b) => a + b) / timeDifferenceArray.length).toFixed(3) + ' miliseconds.  <em>'+ numberOfExecutions +' execution(s).</em>'
+    let avg = numOfGoClicks + '. ' + sortType + ': average of ' + (timeDifferenceArray.reduce((a,b) => a + b) / timeDifferenceArray.length).toFixed(3) + ' miliseconds.  <em>'+ numberOfExecutions +' execution(s). Array size: ' + (inputArray.length) + '.</em>'
     numOfGoClicks++
 
     $('#result_text').append('<p>'+avg+'</p>')
+
+    console.log(inputArray)
+    document.getElementById('showSortedArrayBtn').style.display = 'block'
+    $('#sorted_array_display').append(inputArray)
+    
+}
+
+function displaySortedArray() {
+    if(!sortedArrayVisible) {
+        document.getElementById('sorted_array_display').style.visibility = 'visible'
+        sortedArrayVisible = true
+    } else {
+        document.getElementById('sorted_array_display').style.visibility = 'hidden'
+        sortedArrayVisible = false
+    }
 }

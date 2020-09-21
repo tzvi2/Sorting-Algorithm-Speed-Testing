@@ -2,9 +2,17 @@
     display: none;
 }
 
-#sorted_array {
+#showSortedArrayBtn {
     display: none;
 }
+
+#sorted_array_display {
+    visibility: hidden;
+}
+
+/* #array_input {
+    text-align: right;
+} */
 
 #result_text {
     display: none;
