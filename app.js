@@ -22,6 +22,9 @@ document.getElementById('bubble_info').style.display = 'block'
 // display correct text when dropdown menu options are selected
 $('#algo_dropdown').change(showInfo)
 
+// random array generator button 
+$('#generate_random_btn').click(getRandom)
+
 $('#array_upload').change(uploadArray)
 
 // run sort function on 'go' click 
@@ -46,7 +49,15 @@ function showInfo() {
 
 // generate random array
 function getRandom() {
-    
+    document.getElementById('array_input').value = ''
+    let str = ''
+    let length = parseInt($('#randSize').val())
+    let min = parseInt($('#randMinVal').val())
+    let max = parseInt($('#randMaxVal').val())
+    for(let i = 0; i < length; i++) {
+        str += (i < length - 1) ? (Math.floor(Math.random() * max) + min + ',') : Math.floor(Math.random() * max) + min
+    }
+    document.getElementById('array_input').value = str
 }
 
 function uploadArray() {
@@ -66,8 +77,9 @@ function sort() {
 
     let arrayField = $('#array_input').val() 
     inputString = (!userUpload) ? arrayField : uploadedArray
+
     if(validateString(inputString)) {
-        // if user uploaded array, use it. If not, use input field. Make correct string into array
+        // convert inputString to array
         arrayify(inputString)
         loading = true;
         spinner()
@@ -95,6 +107,10 @@ function sort() {
 }
 
 function arrayify(str) {
+    // remove trailing comma 
+    if(str[str.length-1] === ',') {
+        str = str.substring(0, str.length - 1)
+    }
     // filter out brackets, then convert string to array of numbers
     inputArray = str.split('').filter(a => a!= '[' && a != ']').join('').split(',').map(a => parseInt(a))
 }
