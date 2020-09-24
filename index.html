@@ -20,63 +20,92 @@
         radix sort
      -->
     
-        <h1>Sorting Algorithm Speed Testing</h1>
-        <div class="navbar">
-            <nav>
-                <ul>
-                    <li id="item1"><a href="index.html">Testing</a></li>
-                    <li id="item2"><a href="about.html">About</a></li>
-                </ul>
-            </nav>
+    <div class="header">
+        <div>
+            <h1>Sorting Algorithm Speed Testing</h1>
         </div>
-        
-        <div class="algo_options">
-            <label for="algos">Choose a sorting algorithm:</label>
-            <select name="algos" id="algo_dropdown">
-                <option value="Bubble sort">Bubble Sort</option>
-                <option value="Insertion sort">Insertion Sort</option>
-                <option value="Quick sort">Quick Sort</option>
-            </select>
-            <div id="algo_info">
-                <p id="bubble_info">Bubble sort starts from the beginning of an array, and compares the first two numbers. If the left number is greater than the right, the two numbers are swapped. We then compare the second and third numbers, and so on -  until we reach the end, when we start over from the beggining. If there were no swaps made in a given loop, the array is sorted.</p>
-                <p id="insertion_info">Insertion sort is named as it is because we insert each number where it belongs. We start at the end of the array, and for each number we set a pointer to its left, if the pointer element is greater than our number, we move the pointer element up one position in the array, and move our pointer left again. (ptr--) If the pointer element is less than our current number, we put our current number in to the right of the pointer.</p>
-                <p id="quick_sort_info">To utilize a quick sort algorithm we choose a number from the array to be a pivot. We'll then use two pointers to travel through the array, comparing numbers to the pivot, and placing numbers lower than the pivot to its left, and higher to its right. After all the numbers were visited by the pointers once, we recurse on each side of the pivot element, choosing a new pivot and comparing numbers to that pivot.</p>
-            </div>
-            <label for="array_input">Array:</label>
-            <input type="text" name="array_input" id="array_input" value="" maxlength="10000000">
-            <br>
-            <label>Random:</label>
-            <label for="randSize">Size:</label>
-            <input type="number" name="randSize" id="randSize" value="1000">
-            <label for="randMinVal">Min value:</label>
-            <input type="number" name="randMinVal" id="randMinVal" value="1">
-            <label for="randMaxVal">Max value:</label>
-            <input type="number" name="randMaxVal" id="randMaxVal" value="10000">
-            <button id="generate_random_btn">Generate</button>
-            <br>
-            <label for="array_upload">Upload:</label>
-            <input type="file" id="array_upload" accept=".txt, .rtf, .doc, .docx">
-            <br>
-            <!-- <button type="button" id="upload_array_btn">Upload</button> -->
-            <label for="num_executions">Number of executions:</label>
-            <input id="num_executions" type="number" value="100" min="1" max="100000" step="10">
-            <!-- <label for="randSize">Random Length:</label>
-            <input type="number">
-            <button type="button" id="random_btn">Generate random</button> -->
-            <br>
-            <button type="button" id="sort_btn">Go</button>
-        </div>
-        
-        <div class="sorted_array">
-            <button id="showSortedArrayBtn">show / hide sorted array</button>
-            <p id="sorted_array_display"></p>
-        </div>
-        
+        <ul>
+            <li id="item1"><a href="index.html">Testing</a></li>
+            <li id="item2"><a href="about.html">About</a></li>
+        </ul>
 
-        <div class="spinner" id="spinner"></div>
-        <div id="result_text">
+    </div>
+
+    <div class="line">
+        <hr>
+    </div>
+
+    <div class="container">  
+
+        <div class="algo_options">
+            <img id="info_icon" src="images/info icon.png" alt="'i' info icon">
+            <div>
+                <label for="algos">Choose an algorithm:</label>
+                <select name="algos" id="algo_dropdown">
+                    <option value="Bubble sort">Bubble Sort</option>
+                    <option value="Insertion sort">Insertion Sort</option>
+                    <option value="Quick sort">Quick Sort</option>
+                </select>
+            </div>
+            <div>
+                <label for="array_input">Array:</label>
+                <input type="text" name="array_input" id="array_input" value="" maxlength="10000000">
+            </div>
+            <div id="upload_div">
+                <label for="array_upload">Upload:</label>
+                <input id="choose_file" type="file" id="array_upload" accept=".txt, .rtf, .doc, .docx">
+            </div>
+            <div id="random_div">
+                <p>Random:</p>
+            </div>
+            <hr id="randomLine">
+            <div>
+                <label id="randSizeLabel" for="randSize">Size:</label>
+                <input type="number" name="randSize" id="randSize" value="1000">
+            </div>
+            <div>
+                <label id="randMinValLabel" for="randMinVal">Min value:</label>
+                <input type="number" name="randMinVal" id="randMin" value="1">
+            </div>
+            <div>
+                <label id="randMaxVal" for="randMaxVal">Max value:</label>
+                <input type="number" name="randMaxVal" id="randMax" value="10000">
+            </div>
+            
+            <button id="generate_random_btn">Generate</button>
+            
+            <div>
+                <label for="num_executions">Number of executions:</label>
+                <input id="num_executions" type="number" value="100" min="1" max="100000" step="10">
+            </div>
+            
+                <button type="button" id="sort_btn">Go</button>
+                <!-- <label for="sorting_progress">Execution progress:</label>
+                <progress id="sorting_progress" value="2" max="10"></progress> -->
+                <div>
+                    <div class="progress-bar">
+                    <span></span>
+                </div>
+                </div>
+                
+            
+        </div>
+
+        <div class="algo_info">
+            <p class="algo_p" id="bubble_info">Bubble sort starts from the beginning of an array, and compares the first two numbers. If the left number is greater than the right, the two numbers are swapped. We then compare the second and third numbers, and so on - until we reach the end, at which point we start over from the beginning. If there were no swaps made in a given loop, the array is sorted.</p>
+            <p class="algo_p" id="insertion_info">Insertion sort is named as it is because we insert each number where it belongs. We start at the end of the array, and for each number we set a pointer to its left, if the pointer element is greater than our number, we move the pointer element up one position in the array, and move our pointer left again. (ptr--) If the pointer element is less than our current number, we put our current number in to the right of the pointer.</p>
+            <p class="algo_p" id="quick_sort_info">To utilize a quick sort algorithm we choose a number from the array to be a pivot. We'll then use two pointers to travel through the array, comparing numbers to the pivot, and placing numbers lower than the pivot to its left, and higher to its right. After all the numbers were visited by the pointers once, we recurse on each side of the pivot element, choosing a new pivot and comparing numbers to that pivot.</p>
             <h3>Results:</h3>
-        </div> 
+            <div class="results_field">
+
+            </div>
+            <div class="sorted_array">
+                <button>Show/hide sorted array</button>
+            </div>
+        </div>
+
+        
+    </div>  
 
     <script src="app.js"></script>
 </body>

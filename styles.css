@@ -1,59 +1,112 @@
 * {
-    margin: 0;
-    padding: 0;
     font-family: 'Nunito Sans', sans-serif;
+    font-size: normal;
 }
 
 h1 {
-    text-align: center;
-    font-weight: 500;
-    margin: 10px 0;
+    font-weight: 400;
 }
 
-.navbar {
-    margin: 10px 0;
-}
-.navbar ul {
+.header {
     display: flex;
-    justify-content: center;
+    line-height: 0;
+}
+
+
+.header ul {
+    margin: 0;
+    padding: 0;
     list-style: none;
+    display: flex;
+    flex-direction: row-reverse;
+    align-items: center;
+    flex-grow: 1;
+    transform: translateY(5px);
 }
 
-.navbar ul li a {
+.header ul li a {
+    font-size: 22px;
     text-decoration: none;
-    color: black;
-    letter-spacing: .4px;
-    font-size: 1.25rem;
-    padding: 0 10px;
+    margin-left: 10px;
+    
 }
 
-#algo_info p{
+hr {
+    margin: 0;
+    transform: translateY(-6px);
+}
+
+.container {
+    display: inline-grid;
+    grid-template-columns: 34% 55%;
+    column-gap: 2%;
+}
+
+.algo_options {
+    text-align: end;
+    margin-top: 4px;
+}
+
+.algo_options img {
+    width: 2.5vw;
+    height: 2.5vw;
+    transform: translateX(3px);
+}
+
+.algo_options div {
+    display: flex;
+    flex-wrap: wrap;
+    padding: 5px 0;
+}
+
+.algo_options label {
+    padding-right: 2%;
+   
+}
+
+.algo_options div select {
+    flex-grow: 1;
+}
+
+.algo_options div input {
+    flex-grow: 1;
+}
+
+.algo_options div input[type="text"], input[type="number"] {
+    border: 1px solid black;
+}
+
+.algo_options button {
+    width: 100%;
+    border: 1px solid black;
+}
+
+#random_div {
+    justify-content: start;
+    padding: 0;
+}
+
+#random_div p {
+    padding: 0;
+    margin: 0;
+
+}
+
+#randomLine {
+    margin: 0;
+    border: 1px lightgray solid;
+    transform: translateY(-4px);
+}
+
+.progress-bar {
+    border: 1px solid black;
+    width: 100%;
+    height: 1.4vh;
+}
+.algo_info {
+    margin-top: 35px;
+}
+
+.algo_info p{
     display: none;
-}
-
-#showSortedArrayBtn {
-    display: none;
-}
-
-#sorted_array_display {
-    visibility: hidden;
-}
-
-#result_text {
-    display: none;
-}
-
-.spinner {
-    display: none;
-    border: 8px solid black;
-    border-top: 8px solid rgb(178, 216, 152);
-    border-radius: 50%;
-    width: 2.6em;
-    height: 2.6em;
-    animation: spin 2s linear infinite;
-}
-
-@keyframes spin {
-    0% { transform: rotate(0deg); }
-    100% { transform: rotate(360deg); }
 }

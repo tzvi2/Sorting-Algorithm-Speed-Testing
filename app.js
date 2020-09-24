@@ -17,7 +17,7 @@ let inputString;
 // TO DO - run algorithm on array before showing results to take off the first run which is different than subsequent runs
 
 // document shows bubble sort text by default
-document.getElementById('bubble_info').style.display = 'block'
+document.getElementById('bubble_info').style.display = 'initial'
 
 // display correct text when dropdown menu options are selected
 $('#algo_dropdown').change(showInfo)
@@ -37,10 +37,9 @@ $('#showSortedArrayBtn').click(displaySortedArray)
 function showInfo() {
 
     sortType = $('#algo_dropdown').val()
-
-    $('#algo_info > p').each(function() {
+    $('.algo_info > p').each(function() {
         if(this.id.split('_').includes(sortType.toLowerCase().split(' ')[0])) {
-            this.style.display = 'block'
+            this.style.display = 'initial'
         } else {
             this.style.display = 'none'
         }
@@ -52,8 +51,8 @@ function getRandom() {
     document.getElementById('array_input').value = ''
     let str = ''
     let length = parseInt($('#randSize').val())
-    let min = parseInt($('#randMinVal').val())
-    let max = parseInt($('#randMaxVal').val())
+    let min = parseInt($('#randMin').val())
+    let max = parseInt($('#randMax').val())
     for(let i = 0; i < length; i++) {
         str += (i < length - 1) ? (Math.floor(Math.random() * max) + min + ',') : Math.floor(Math.random() * max) + min
     }
@@ -82,7 +81,7 @@ function sort() {
         // convert inputString to array
         arrayify(inputString)
         loading = true;
-        spinner()
+        //spinner()
 
         // clear times from previous execution
         startTimeArray = []
@@ -115,14 +114,14 @@ function arrayify(str) {
     inputArray = str.split('').filter(a => a!= '[' && a != ']').join('').split(',').map(a => parseInt(a))
 }
 
-function spinner() {
-    if(loading === true) {
-        document.getElementById('spinner').style.display = 'block'
-    }
-    else if(loading === false) {
-        document.getElementById('spinner').style.display = 'none'
-    }
-}
+// function spinner() {
+//     if(loading === true) {
+//         document.getElementById('spinner').style.display = 'initial'
+//     }
+//     else if(loading === false) {
+//         document.getElementById('spinner').style.display = 'none'
+//     }
+// }
 
 function validateString(str) {
     if(str === '') {
@@ -238,13 +237,13 @@ function results() {
 
     loading = false
     // console.log(inputArray)
-    setTimeout(spinner, 600)
+    //setTimeout(spinner, 600)
     setTimeout(displayResults, 700)
 }
 
 function displayResults() {
 
-    document.getElementById('result_text').style.display = 'block'
+    document.getElementById('result_text').style.display = 'initial'
 
     let avg = numOfGoClicks + '. ' + sortType + ': average of ' + (timeDifferenceArray.reduce((a,b) => a + b) / timeDifferenceArray.length).toFixed(3) + ' miliseconds.  <em>'+ numberOfExecutions +' execution(s). Array size: ' + (inputArray.length) + '.</em>'
     numOfGoClicks++
@@ -252,7 +251,7 @@ function displayResults() {
     $('#result_text').append('<p>'+avg+'</p>')
 
     console.log(inputArray)
-    document.getElementById('showSortedArrayBtn').style.display = 'block'
+    document.getElementById('showSortedArrayBtn').style.display = 'initial'
     $('#sorted_array_display').append(inputArray)
     
 }
