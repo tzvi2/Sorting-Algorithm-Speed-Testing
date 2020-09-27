@@ -164,16 +164,18 @@ hr {
     width: 100%;
     background: aliceblue; 
     padding: 0;
-    animation-duration: 2s;
+    animation-duration: 1.5s;
     animation-iteration-count: infinite;
     animation-name: load;
     animation-direction: alternate;
     visibility: hidden;
+    
 }
 
 @keyframes load {
-    0% {background-color: aliceblue;}
-    100% {background-color: #a9b2ba;}
+    0% {background-color: rgb(213, 210, 210);}
+    100% {background-color: rgb(222, 155, 74);}
+    
 }
 .algo_info div {
     display: flex;

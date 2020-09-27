@@ -15,6 +15,12 @@ let inputString;
 let loading = false;
 let loadingBar = document.getElementById('progress_bar')
 
+
+// phone check
+if (navigator.userAgent.match(/mobi/mi)) {
+    alert('Please note: this site is not designed for mobile use.')
+}
+
 // nav link listeners
 $('#testing_page_link').click(styleTesting)
 $('#about_page_link').click(styleAbout)
@@ -281,7 +287,7 @@ function results() {
 
 function displayResults() {
 
-    let avg = numOfGoClicks + '. ' + sortType + ': average of ' + (timeDifferenceArray.reduce((a,b) => a + b) / timeDifferenceArray.length).toFixed(3) + ' miliseconds.  <em>'+ numberOfExecutions +' execution(s). Array size: ' + (inputArray.length) + '.</em>'
+    let avg = numOfGoClicks + '. ' + sortType + ': average of ' + (timeDifferenceArray.reduce((a,b) => a + b) / timeDifferenceArray.length).toFixed(3) + ' miliseconds.  <em>'+ numberOfExecutions +' execution(s). Array size: ' + (inputArray.length).toLocaleString() + '.</em>'
 
     $('.results_field').append('<p id=result'+ numOfGoClicks +'>' + avg + "</p>")
     document.getElementById('result'+numOfGoClicks).scrollIntoView()
