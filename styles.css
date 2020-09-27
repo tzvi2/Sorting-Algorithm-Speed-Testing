@@ -138,6 +138,13 @@ hr {
     transform: translateY(-4px);
 }
 
+#generate_random_btn {
+    width: 25%;
+    margin: auto;
+    color: #348cd2;
+    border: 1px solid #348cd2;
+}
+
 #sort_btn {
     color: #348cd2;
     border: 2px solid #348cd2;
@@ -149,7 +156,9 @@ hr {
 }
 
 #sort_btn:active {
-    font-weight: 700;
+    font-weight: 800;
+    letter-spacing: 1px;
+    background-color: #d4d8dc;
 }
 
 #progress_bar {
