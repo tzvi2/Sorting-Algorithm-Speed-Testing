@@ -153,15 +153,18 @@ hr {
 }
 
 #progress_bar_background {
+    justify-content: center;
     margin-top: 8px;
     border: 1px solid rgb(255, 255, 255);
     padding: 0;
-    background: rgb(255, 255, 255)
+    background: rgb(255, 255, 255);
+    
 }
 
 #progress_bar {
     height: 3vh;
     width: 100%;
+    justify-content: center;
     background: aliceblue; 
     padding: 0;
     animation-duration: 1.5s;
@@ -169,7 +172,6 @@ hr {
     animation-name: load;
     animation-direction: alternate;
     visibility: hidden;
-    
 }
 
 @keyframes load {

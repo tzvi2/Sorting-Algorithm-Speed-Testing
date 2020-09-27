@@ -149,22 +149,16 @@ function arrayify(str) {
 function setLoading() {
     if(!loading) {
         loading = true
+        document.getElementById('progress_bar').innerText = ''
+        document.getElementById('progress_bar').append('Loading...')
         document.getElementById('progress_bar').style.visibility = 'visible'
     } else {
         loading = false
         document.getElementById('progress_bar').style.visibility = 'hidden'
+        document.getElementById('progress_bar_background').innerText = 'Done'
         document.getElementById('progress_bar_background').style.background = 'linear-gradient(to right, rgb(202, 199, 199), #348cd2)'
     }
 }
-
-// function spinner() {
-//     if(loading === true) {
-//         document.getElementById('spinner').style.display = 'initial'
-//     }
-//     else if(loading === false) {
-//         document.getElementById('spinner').style.display = 'none'
-//     }
-// }
 
 function validateString(str) {
     if(str === '') {
