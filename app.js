@@ -8,34 +8,58 @@ let timeDifferenceArray = []
 let uploadedArray;
 let inputArray;
 let numberOfExecutions = 1;
-let loading = false;
-let numOfGoClicks = 1
+let numOfGoClicks = 0
 let sortedArrayVisible = false;
 let userUpload = false;
 let inputString;
+let loading = false;
+let loadingBar = document.getElementById('progress_bar')
 
-// TO DO - run algorithm on array before showing results to take off the first run which is different than subsequent runs
+// nav link listeners
+$('#testing_page_link').click(styleTesting)
+$('#about_page_link').click(styleAbout)
 
-// document shows bubble sort text by default
+// bold current page
+function styleTesting() {
+    if($('#testing_page_link').hasClass('active')) {
+        return
+    } else {
+        $('#testing_page_link').toggleClass('active')
+    }
+}
+
+function styleAbout() {
+    if($('#about_page_link').hasClass('active')) {
+        return
+    } else {
+        $('#about_page_link').toggleClass('active')
+    }
+}
+
+// set display of bubble sort info
 document.getElementById('bubble_info').style.display = 'initial'
 
+// hide bubble sort info by default
+document.getElementById('bubble_info').style.visibility = 'visible'
+
 // display correct text when dropdown menu options are selected
-$('#algo_dropdown').change(showInfo)
+$('#algo_dropdown').change(getType)
 
 // random array generator button 
 $('#generate_random_btn').click(getRandom)
 
-$('#array_upload').change(uploadArray)
+$('#choose_file').change(uploadArray)
 
 // run sort function on 'go' click 
 $('#sort_btn').click(sort)
 
-// show sorted array button - allows user to hide and display sorted array
-$('#showSortedArrayBtn').click(displaySortedArray)
+$('#clear_results_btn').click(clearResults)
+
+// log sorted array button listener
+$('#log_sorted').click(logSortedArray)
 
 // display information about selected sorting algorithm
-function showInfo() {
-
+function getType() {
     sortType = $('#algo_dropdown').val()
     $('.algo_info > p').each(function() {
         if(this.id.split('_').includes(sortType.toLowerCase().split(' ')[0])) {
@@ -60,19 +84,20 @@ function getRandom() {
 }
 
 function uploadArray() {
-    console.log('change')
     userUpload = true
     let reader = new FileReader()
     reader.readAsText(this.files[0])
     reader.onload = () => {
         uploadedArray = reader.result
-        //console.log(uploadedArray)
     }  
 }
 
-
 // identify and run selected sorting algorithm
 function sort() {
+
+    if(loading){return}
+
+    numOfGoClicks++
 
     let arrayField = $('#array_input').val() 
     inputString = (!userUpload) ? arrayField : uploadedArray
@@ -80,8 +105,9 @@ function sort() {
     if(validateString(inputString)) {
         // convert inputString to array
         arrayify(inputString)
-        loading = true;
+        //loading = true;
         //spinner()
+        setLoading()
 
         // clear times from previous execution
         startTimeArray = []
@@ -101,7 +127,7 @@ function sort() {
             else if(sortType === 'Quick sort') {
                 quickSort(inputArray)
             }
-        }, 300)
+        }, 1000)
     }
 }
 
@@ -112,6 +138,17 @@ function arrayify(str) {
     }
     // filter out brackets, then convert string to array of numbers
     inputArray = str.split('').filter(a => a!= '[' && a != ']').join('').split(',').map(a => parseInt(a))
+}
+
+function setLoading() {
+    if(!loading) {
+        loading = true
+        document.getElementById('progress_bar').style.visibility = 'visible'
+    } else {
+        loading = false
+        document.getElementById('progress_bar').style.visibility = 'hidden'
+        document.getElementById('progress_bar_background').style.background = 'linear-gradient(to right, rgb(202, 199, 199), #348cd2)'
+    }
 }
 
 // function spinner() {
@@ -135,8 +172,8 @@ function validateString(str) {
     return true
 }
 
-function bubbleSort(arr) {
 
+function bubbleSort(arr) {
     for(let e = 0; e < numberOfExecutions; e++) {
         startTimeArray.push(performance.now())
         let sorted = false;
@@ -154,7 +191,7 @@ function bubbleSort(arr) {
             runs++
         }
         endTimeArray.push(performance.now())
-        //return arr
+        //return arr  
     }
     results()
 }
@@ -226,6 +263,8 @@ function swap(arr, i1, i2){
     arr[i2] = tmp;
 }
 
+
+
 function results() {
     
     for(let i = 0; i < endTimeArray.length; i++) {
@@ -235,33 +274,26 @@ function results() {
         timeDifferenceArray.push(diff) 
     }
 
-    loading = false
     // console.log(inputArray)
-    //setTimeout(spinner, 600)
-    setTimeout(displayResults, 700)
+    setTimeout(setLoading, 300)
+    setTimeout(displayResults, 100)
 }
 
 function displayResults() {
 
-    document.getElementById('result_text').style.display = 'initial'
-
     let avg = numOfGoClicks + '. ' + sortType + ': average of ' + (timeDifferenceArray.reduce((a,b) => a + b) / timeDifferenceArray.length).toFixed(3) + ' miliseconds.  <em>'+ numberOfExecutions +' execution(s). Array size: ' + (inputArray.length) + '.</em>'
-    numOfGoClicks++
 
-    $('#result_text').append('<p>'+avg+'</p>')
-
-    console.log(inputArray)
-    document.getElementById('showSortedArrayBtn').style.display = 'initial'
-    $('#sorted_array_display').append(inputArray)
-    
+    $('.results_field').append('<p id=result'+ numOfGoClicks +'>' + avg + "</p>")
+    document.getElementById('result'+numOfGoClicks).scrollIntoView()
 }
 
-function displaySortedArray() {
-    if(!sortedArrayVisible) {
-        document.getElementById('sorted_array_display').style.visibility = 'visible'
-        sortedArrayVisible = true
-    } else {
-        document.getElementById('sorted_array_display').style.visibility = 'hidden'
-        sortedArrayVisible = false
-    }
+function clearResults() {
+    $(".results_field").empty()
+    numOfGoClicks = 0
+}
+
+function logSortedArray() {
+    console.log( 
+        (!inputArray) ? 'You haven\'t sorted an array.' : inputArray
+    )
 }

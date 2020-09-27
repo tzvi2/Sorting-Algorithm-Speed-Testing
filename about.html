@@ -9,13 +9,36 @@
     <title>Document</title>
 </head>
 <body>
-        <h1>Sorting Algorithm Speed Testing</h1>
-        <div class="navbar">
-            <nav>
-                <ul>
-                    <li id="item1"><a href="index.html">Testing</a></li>
-                    <li id="item2"><a href="about.html">About</a></li>
-                </ul>
-            </nav>
+    <div class="header">
+        <div id="h1_div">
+            <h1>Sorting Algorithm Speed Testing</h1>
         </div>
-        <p id="about_p">Bla bla bla</p>
+        <ul>
+            <li><a id="testing_page_link" href="index.html">Testing</a></li>
+            <li><a id="about_page_link" class="active" href="about.html">About</a></li>
+        </ul>
+        
+    </div>
+
+    <div class="line">
+        <hr>
+    </div>
+       
+    <div id="about_p">
+        <p>
+            This site is made for testing the performance of various sorting algorithms in sorting specific arrays.
+     
+            This can be useful for:
+            <ul>
+                <li>someone who wants to optimize their website/app by using the fastest sorting algorithms for their partuclar data</li>
+               <br>
+                <li>someone interested in calculating the break points (in size) at which various sorting algorithms become faster, and perhaps worth using, than counterparts.</li>
+            </ul>
+    
+            Different sorting algorithms can have different runtimes when ran with different size inputs.
+            Algorithms with an O(n^2) time complexity can perform faster (in miliseconds) than an algorithm with a "better" big-O time given certain size inputs. 
+            This site will allow you to sort arrays with various sorting algorithms in order to find the fastest one for your specific needs. 
+            Results are displayed for easy comparison. 
+        </p>
+    </div>
+    
