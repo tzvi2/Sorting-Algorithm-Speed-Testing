@@ -152,33 +152,17 @@ hr {
     font-weight: 700;
 }
 
-#progress_bar_background {
-    justify-content: center;
-    margin-top: 8px;
-    border: 1px solid rgb(255, 255, 255);
-    padding: 0;
-    background: rgb(255, 255, 255);
-    
-}
-
 #progress_bar {
-    height: 3vh;
-    width: 100%;
     justify-content: center;
-    background: aliceblue; 
+    margin: 2% 0;
     padding: 0;
-    animation-duration: 1.5s;
-    animation-iteration-count: infinite;
-    animation-name: load;
-    animation-direction: alternate;
     visibility: hidden;
 }
 
-@keyframes load {
-    0% {background-color: rgb(213, 210, 210);}
-    100% {background-color: rgb(222, 155, 74);}
-    
+#prog_bar_p {
+    margin: 0;
 }
+
 .algo_info div {
     display: flex;
 }

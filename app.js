@@ -100,15 +100,13 @@ function uploadArray() {
 
 // identify and run selected sorting algorithm
 function sort() {
-
     if(loading){return}
-
-    numOfGoClicks++
 
     let arrayField = $('#array_input').val() 
     inputString = (!userUpload) ? arrayField : uploadedArray
 
     if(validateString(inputString)) {
+        numOfGoClicks++
         // convert inputString to array
         arrayify(inputString)
         //loading = true;
@@ -149,14 +147,15 @@ function arrayify(str) {
 function setLoading() {
     if(!loading) {
         loading = true
-        document.getElementById('progress_bar').innerText = ''
-        document.getElementById('progress_bar').append('Loading...')
+        $('#prog_bar_p').empty()
+        $('#prog_bar_p').append('Loading...')
+        document.getElementById('progress_bar').style.background = 'linear-gradient(to left, silver 60%, rgb(255, 140, 0))'
         document.getElementById('progress_bar').style.visibility = 'visible'
     } else {
         loading = false
-        document.getElementById('progress_bar').style.visibility = 'hidden'
-        document.getElementById('progress_bar_background').innerText = 'Done'
-        document.getElementById('progress_bar_background').style.background = 'linear-gradient(to right, rgb(202, 199, 199), #348cd2)'
+        $('#prog_bar_p').empty()
+        $('#prog_bar_p').append('Done')
+        document.getElementById('progress_bar').style.background = 'linear-gradient(to right, rgb(202, 199, 199), #348cd2)'
     }
 }
 
