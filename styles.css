@@ -29,7 +29,7 @@ button:active {
 }
 
 /* linear-gradient(to right, #81bef0, rgb(45, 59, 140)); 
-below 1024, below 610 */
+below 1106, below 610 */
 
 #h1_div {
     background: linear-gradient(to top, #348cd2 60%, rgb(45, 59, 140));
@@ -163,7 +163,7 @@ hr {
 
 #progress_bar {
     justify-content: center;
-    margin: 2% 0;
+    margin: 1.3% 0;
     padding: 0;
     visibility: hidden;
 }
