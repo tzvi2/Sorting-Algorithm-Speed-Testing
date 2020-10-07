@@ -6,7 +6,7 @@
     <link rel="stylesheet" href="styles.css" type="text/css">
     <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:ital,wght@0,200;0,300;0,400;0,600;0,700;0,800;0,900;1,200;1,300;1,400;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js" type="text/javascript"></script>
-    <title>Document</title>
+    <title>Testing</title>
 </head>
 <body>
     
@@ -65,20 +65,23 @@
 
             <div>
                 <label id="randSizeLabel" for="randSize"><em>Size:</em></label>
-                <input type="number" name="randSize" id="randSize" value="1000" step="100">
+                <input type="number" name="randSize" id="randSize" value="1000" step="100" max="5000000">
             </div>
 
             <div>
                 <label id="randMinValLabel" for="randMinVal"><em>Min value:</em></label>
-                <input type="number" name="randMinVal" id="randMin" value="1">
+                <input type="number" name="randMinVal" id="randMin" value="1" >
             </div>
 
             <div>
                 <label id="randMaxVal" for="randMaxVal"><em>Max value:</em></label>
-                <input type="number" name="randMaxVal" id="randMax" value="10000">
+                <input type="number" name="randMaxVal" id="randMax" value="10000" max="1000000000000">
             </div>
             
-            <button id="generate_random_btn">Generate</button>
+            <div id="randBtnDiv">
+                <div class="loader" id="loader"></div>
+                <button id="generate_random_btn">Generate</button>
+            </div>
             
             <div>
                 <label for="num_executions">Number of executions:</label>

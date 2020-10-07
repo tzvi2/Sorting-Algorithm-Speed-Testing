@@ -1,14 +1,11 @@
 
-
-
-
 // generate random array
 function getRandom(size, min, max) {
-    let str = ''
+    let randArr = []
     for(let i = 0; i < size; i++) {
-        str += (i < size - 1) ? (Math.floor(Math.random() * max) + min + ',') : Math.floor(Math.random() * max) + min
+        randArr.push(Math.floor(Math.random() * max) + min).toString()
     }
-    return str
+    return randArr
 }
 
 // validate input string

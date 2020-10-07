@@ -1,5 +1,4 @@
 function bubbleSort(arr) {
-    //console.log('bubble')
     let sorted = false;
     let runs = 0;
     while(!sorted) {
@@ -18,7 +17,6 @@ function bubbleSort(arr) {
 }
 
 function insertionSort(arr) {
-    //console.log('insertion')
     for(let i = 1; i < arr.length; i++) {
         let current = arr[i]
         let finder = i - 1;
@@ -31,7 +29,8 @@ function insertionSort(arr) {
     return arr
 }
 
-
+// with thanks to guru99.com
+// https://www.guru99.com/quicksort-in-javascript.html
 function quickSort(arr, left=0, right=arr.length-1) {
     let i;
     if (arr.length > 1) {

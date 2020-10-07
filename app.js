@@ -17,6 +17,7 @@ let userUpload = false;
 let inputString;
 let loading = false;
 let loadingBar = document.getElementById('progress_bar')
+let randomLoading = false;
 let sortAlgo = bubbleSort
 
 // set display of bubble sort info
@@ -53,11 +54,15 @@ $('#algo_dropdown').change(infoChange)
 
 // random array generator button 
 $('#generate_random_btn').click(function() {
-    let length = parseInt($('#randSize').val())
-    let min = parseInt($('#randMin').val())
-    let max = parseInt($('#randMax').val())
-    clearField('array_input')
-    document.getElementById('array_input').value = getRandom(length, min, max)
+    document.getElementById('loader').style.visibility = 'visible'
+    setTimeout(function() {
+        let length = parseInt($('#randSize').val())
+        let min = parseInt($('#randMin').val())
+        let max = parseInt($('#randMax').val())
+        clearField('array_input')
+        document.getElementById('array_input').value = getRandom(length, min, max)
+        document.getElementById('loader').style.visibility = 'hidden'
+    }, 500)
 })
 
 // function to save uploaded array

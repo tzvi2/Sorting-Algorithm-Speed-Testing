@@ -83,14 +83,11 @@ hr {
     margin-top: 3%;
 }
 
-.algo_options {
-    text-align: end;
-}
-
 .algo_options div {
     display: flex;
     flex-wrap: wrap;
     padding: 6px 0;
+    justify-content: flex-end;
 }
 
 .algo_options label {
@@ -140,9 +137,25 @@ hr {
 
 #generate_random_btn {
     width: 25%;
-    margin: auto;
     color: #348cd2;
     border: 1px solid #348cd2;
+}
+
+div .loader {
+    visibility: hidden;
+    width: 3vh;
+    height: 3vh;
+    margin-right: 1%;
+    padding: 0;
+    border: 8px solid #d4d8dc;
+    border-radius: 50%;
+    border-top: 8px solid #348cd2;
+    animation: spin 2s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
 }
 
 #sort_btn {
