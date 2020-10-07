@@ -38,7 +38,6 @@ function arrayify(str) {
 }
 
 function executeXTimes(algo, arr, num, startArr, endArr, callback) {
-    console.log('executing x times')
     for(let i = 0; i < num; i++) {
         startArr.push(performance.now())
         algo(arr)

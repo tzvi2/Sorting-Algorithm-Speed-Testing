@@ -152,8 +152,9 @@ function results() {
 }
 
 function displayResults() {
-
-    let avg = numOfGoClicks + '. ' + sortType + ': average of ' + (timeDifferenceArray.reduce((a,b) => a + b) / timeDifferenceArray.length).toFixed(3) + ' miliseconds.  <em>'+ numberOfExecutions +' execution(s). Array size: ' + (inputArray.length).toLocaleString() + '.</em>'
+    let avg = numOfGoClicks + '. ' + sortType + ': average of ' + 
+    (timeDifferenceArray.reduce((a,b) => a + b) / timeDifferenceArray.length).toFixed(3) + 
+    ' miliseconds.  <em>'+ numberOfExecutions +' execution(s). Array size: ' + (inputArray.length).toLocaleString() + '.</em>'
 
     $('.results_field').append('<p id=result'+ numOfGoClicks +'>' + avg + "</p>")
     document.getElementById('result'+numOfGoClicks).scrollIntoView()

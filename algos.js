@@ -31,8 +31,8 @@ function insertionSort(arr) {
     return arr
 }
 
-function quickSort(arr, left, right) {
-    //console.log('quick')
+
+function quickSort(arr, left=0, right=arr.length-1) {
     let i;
     if (arr.length > 1) {
         i = partition(arr, left, right); 
