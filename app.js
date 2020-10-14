@@ -1,4 +1,4 @@
-import { bubbleSort, insertionSort, quickSort } from './algos.js'
+import { bubbleSort, insertionSort, quickSort, mergeSort } from './algos.js'
 import { getRandom, validateString, arrayify, executeXTimes, clearField } from './utilities.js'
 
 let sortType = 'Bubble sort';
@@ -88,6 +88,9 @@ function infoChange() {
     } 
     else if(sortType === 'Quick sort') {
         sortAlgo = quickSort
+    }
+    else if(sortType === 'Merge sort') {
+        sortAlgo = mergeSort
     }
 
     $('.algo_info > p').each(function() {

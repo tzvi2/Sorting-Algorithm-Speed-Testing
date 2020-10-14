@@ -71,4 +71,50 @@ function swap(arr, i1, i2){
     arr[i2] = tmp;
 }
 
-export { bubbleSort, insertionSort, quickSort }
+function mergeSort(arr) {
+    if(arr.length == 1) {
+        return arr
+    }
+    let tempArr = arr.slice(0, arr.length - 1)
+    split(arr, 0, arr.length - 1, tempArr)
+    return arr
+}
+
+function split(mainArr, start, end, tempArr) {
+    if(start == end) {
+        return 
+    }
+    let mid = Math.floor((start + end) / 2)
+    split(tempArr, start, mid, mainArr)
+    split(tempArr, mid + 1, end, mainArr)
+    merge(mainArr, start, mid, end, tempArr)
+}
+    
+function merge(mainArr, start, mid, end, tempArr) {
+    let k = start
+    let i = start
+    let j = mid + 1
+    while(i <= mid && j <= end) {
+        if(tempArr[i] <= tempArr[j]) {
+            mainArr[k] = tempArr[i]
+            i+=1
+        }
+        else {
+            mainArr[k] = tempArr[j]
+            j+=1
+        }
+        k+=1
+    }
+    while(i <= mid){
+        mainArr[k] = tempArr[i]
+        i+=1
+        k+=1
+    }
+    while(j <= end){
+        mainArr[k] = tempArr[j]
+        j+=1
+        k+=1
+    }
+}
+
+export { bubbleSort, insertionSort, quickSort, mergeSort }
