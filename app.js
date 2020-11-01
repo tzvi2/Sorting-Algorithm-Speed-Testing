@@ -23,11 +23,6 @@ let sortAlgo = bubbleSort
 // set display of bubble sort info
 document.getElementById('bubble_info').style.display = 'initial'
 
-// phone check
-if (navigator.userAgent.match(/mobi/mi)) {
-    alert('Please note: this site is not designed for mobile use.')
-}
-
 // navigation link listeners (for styling)
 $('#testing_page_link').click(styleTesting)
 $('#about_page_link').click(styleAbout)

@@ -25,15 +25,6 @@
         <hr>
     </div>
 
-    <!-- <div id="outer_icon_div">
-        <div id="left_icon_div">
-            <img id="info_icon" src="images/info icon.png" alt="'i' info icon">
-        </div>
-        <div id="right_icon_div">
-
-        </div>
-    </div> -->
-
     <div class="container">  
 
         <div class="algo_options">
@@ -48,7 +39,7 @@
                 </select>
             </div>
 
-            <div>
+            <div id="arrDiv">
                 <label for="array_input">Array:</label>
                 <input type="text" name="array_input" id="array_input" value="" maxlength="10000000">
             </div>
@@ -64,27 +55,27 @@
 
             <hr id="randomLine">
 
-            <div>
+            <div class="randChild">
                 <label id="randSizeLabel" for="randSize"><em>Size:</em></label>
                 <input type="number" name="randSize" id="randSize" value="1000" step="100" max="5000000">
             </div>
 
-            <div>
+            <div class="randChild">
                 <label id="randMinValLabel" for="randMinVal"><em>Min value:</em></label>
                 <input type="number" name="randMinVal" id="randMin" value="1" >
             </div>
 
-            <div>
+            <div class="randChild">
                 <label id="randMaxVal" for="randMaxVal"><em>Max value:</em></label>
                 <input type="number" name="randMaxVal" id="randMax" value="10000" max="1000000000000">
             </div>
             
             <div id="randBtnDiv">
-                <div class="loader" id="loader"></div>
+                <p class="loader" id="loader"></p>
                 <button id="generate_random_btn">Generate</button>
             </div>
             
-            <div>
+            <div id="executionDiv">
                 <label for="num_executions">Number of executions:</label>
                 <input id="num_executions" type="number" value="100" min="1" max="100000" step="10">
             </div>
@@ -94,7 +85,7 @@
             <progress id="sorting_progress" value="2" max="10"></progress> -->
                 
             <div id="progress_bar">
-                <p id="prog_bar_p"></p>
+                <div id="prog_bar_p"></div> 
             </div>
             
         </div>
